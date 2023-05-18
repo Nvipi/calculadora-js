@@ -1,0 +1,33 @@
+.calculadora {
+  background: var(--bs-gray);
+  width: 80%;
+  max-width: 350px;
+  padding: 20px 20px 10px 20px;
+}
+
+.teclas-calc {
+  width: 100%;
+  max-width: 305px;
+  margin-bottom: 10px;
+}
+
+.btn-calc {
+  width: 24.5%;
+}
+
+.btn-left {
+  margin-right: 1px;
+}
+
+.btn-cent {
+  margin: 0px 1px;
+}
+
+.btn-right {
+  margin-left: 1px;
+}
+
+body {
+  height: 100vh;
+}
+
