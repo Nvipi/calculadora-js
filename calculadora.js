@@ -1,5 +1,5 @@
 // Opciones validas de la calculadora
-const opciones = ["(",")","C","9","8","7","6","5","4","3","2","1","0","/","*","+","-",".","b","="];
+const opciones = ["(",")","C","9","8","7","6","5","4","3","2","1","0","/","*","+","-",".","b","=","Backspace","Enter"];
 
 // Obtenemos el elemento que mostrara el calculo/resultado
 const pantalla = document.getElementById("resultado");
@@ -13,9 +13,13 @@ function realizarOperacion(fn) {
     return new Function('return ' + fn)();
 }
 
-// Funsion a realizar cuando se clickea un boton
-const click = function (e) {
-	if(opciones.includes(this.value)){
+// Funcion a realizar cuando se clickea un boton
+const digitar = function (e) {
+    // Comprobar que lo digitado (click/teclado) esta dentro de los valores permitidos
+	if(opciones.includes(this.value) || opciones.includes(e.key)){
+        // Valor ingresado
+        const valor = (this.value) ? this.value : e.key;
+
         // Si lo ultimo ocurrido es un error
         if(pantalla.innerText == "Error") pantalla.innerText = "";
 
@@ -25,17 +29,17 @@ const click = function (e) {
         // Realizamos las acciones
 
         // Limpiar la pantalla
-        if(this.value == "C") return pantalla.innerText = "";
+        if(valor == "C" || valor == "Delete") return pantalla.innerText = "";
 
         // Borrar un digito/valor/etc
-        if(this.value == "b" && resultado.length > 0) return pantalla.innerText = resultado.slice(0,(resultado.length-1));
+        if(valor == "b" || valor == "Backspace" && resultado.length > 0) return pantalla.innerText = resultado.slice(0,(resultado.length-1));
 
         // Agregar un digito/valor/etc con limitacion de 16 caracteres
-        if(this.value != "b" && this.value != "=" && resultado.length < 16) return pantalla.innerText = resultado + this.value;
+        if(valor != "b" && valor != "Backspace" && valor != "=" && valor != "Enter" && resultado.length < 16) return pantalla.innerText = resultado + valor;
 
         // Obtener el resultado y actuar en caso de la operacion no este estructurada correctamente
         try{
-            if(this.value == "=") return pantalla.innerText = realizarOperacion(resultado);
+            if(valor == "=" || valor == "Enter") return pantalla.innerText = realizarOperacion(resultado);
 
         }catch{
             pantalla.innerText = "Error";
@@ -48,5 +52,8 @@ const click = function (e) {
 // Recorremos los botones
 botones.forEach(boton => {
 	// Ejecutar la funcion al dar click en el boton
-	boton.addEventListener("click", click);
+	boton.addEventListener("click", digitar);
 });
+
+// Detectamos el teclado del usuario
+document.addEventListener('keydown', digitar);
