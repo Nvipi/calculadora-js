@@ -1,3 +1,7 @@
+body {
+  height: 100vh;
+}
+
 .calculadora {
   background: var(--bs-gray);
   width: 80%;
@@ -27,7 +31,7 @@
   margin-left: 1px;
 }
 
-body {
-  height: 100vh;
+.result {
+  background: white;
+  min-height: 40px;
 }
-
