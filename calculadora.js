@@ -15,18 +15,32 @@ function realizarOperacion(fn) {
 
 // Creamos un campo "invisible" con el resultado, debido a que la pantalla no logra mostrar correctamente el valor tan largo
 function copiarAlPortapapeles(valor) {
-    // creamos campo
-    const aux = document.createElement("input");
-    // le asignamos el valor
-    aux.setAttribute("value", valor);
-    // Agregamos el campo al body
-    document.body.appendChild(aux);
-    // Seleccionamos el campo y su valor
-    aux.select();
-    // Copiamos el valor
-    document.execCommand("copy");
-    // Eliminamos el campo
-    document.body.removeChild(aux);
+
+    // Comprobar si el navegar implementa la nueva forma de copiar
+    if (!navigator.clipboard){
+        // creamos campo
+        const aux = document.createElement("input");
+        // le asignamos el valor
+        aux.setAttribute("value", valor);
+        // Agregamos el campo al body
+        document.body.appendChild(aux);
+        // Seleccionamos el campo y su valor
+        aux.select();
+        // Copiamos el valor
+        document.execCommand("copy");
+        // Eliminamos el campo
+        document.body.removeChild(aux);
+
+    } else{
+        // Copiamos el contenido
+        navigator.clipboard.writeText(valor).then( () => {
+            /* console.log("Copiado"); */
+        })
+        .catch((error) => {
+            console.error('Error al copiar: ', error);
+        });
+    }
+
 }
 
 // Funcion a realizar cuando se clickea un boton
