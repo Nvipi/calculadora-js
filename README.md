@@ -31,7 +31,6 @@ Este es un proyecto de una calculadora básica desarrollada en JavaScript, HTML 
 
 Las contribuciones son bienvenidas. Si deseas mejorar la calculadora o agregar nuevas características, siéntete libre de hacer un fork del repositorio y enviar tus pull requests.
 
-
 ## Contacto
 
 Si tienes alguna pregunta o sugerencia sobre este proyecto, puedes contactarme a través de mi correo electrónico: [josue.parada.tapia@gmail.com](mailto:josue.parada.tapia@gmail.com).
